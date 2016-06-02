@@ -1,7 +1,7 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: drKox
- * Date: 02.06.2016
- * Time: 16:36
- */
+$link = mysqli_connect("localhost", "root", "", "lesson_7");
+mysqli_set_charset($link, "utf8");
+if (mysqli_connect_errno()) {
+    printf("Connect failed: %s\n", mysqli_connect_error());
+    exit();
+}
