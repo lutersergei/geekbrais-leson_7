@@ -4,6 +4,7 @@
 }
 .title {
     font-family: 'Josefin Sans', sans-serif;
-    font-size: 28pt;
+    font-size: 34pt;
+    color: rgba(15, 70, 80, 0.9);;
     margin-bottom: 50px;
 }
