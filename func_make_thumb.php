@@ -1,5 +1,5 @@
 <?php
-function makeThumbnails($updir, $img, $id,$MaxWe=300,$MaxHe=300){
+function makeThumbnails($updir, $img, $id,$MaxWe=300,$MaxHe=200){
     $arr_image_details = getimagesize($img);
     $width = $arr_image_details[0];
     $height = $arr_image_details[1];
