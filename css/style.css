@@ -1,5 +1,6 @@
 .info {
     font-family: 'Roboto Mono', monospace;
+    font-size: 8pt;
     color: #5cb85c;
 }
 .title {
@@ -7,4 +8,17 @@
     font-size: 34pt;
     color: rgba(15, 70, 80, 0.9);;
     margin-bottom: 50px;
+}
+.imgage-thumbnail {
+    /*max-height: 200px;*/
+}
+.thumbnail_new {
+    display: inline-block;
+    vertical-align: top;
+    margin-top: 20px;
+    max-width: 24%;
+
+}
+.thumbnail {
+    margin-bottom: 0px;
 }
