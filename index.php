@@ -8,7 +8,6 @@ define('DANGER_SIZE_EXCEEDED','Превышен максимальный раз�
 define('SUCCESS','Изображение успешно загружено');
 $folder=false;
 $result=false;
-$files_array=array();
 //Явно не лучший скрипт для создания превью. Но работает
 include 'func_make_thumb.php';
 include 'database_connection.php';
@@ -18,32 +17,18 @@ if (isset($_SESSION['result']))
     $result=$_SESSION['result'];
     unset($_SESSION['result']);
 }
-//Проверкa существования папки (если её нет - создаем)
-if (!is_dir($_SERVER['DOCUMENT_ROOT'].DIRECTORY_SEPARATOR.'img'))
+$query="SELECT * FROM `file_information` ORDER BY `file_information`.`views` DESC";
+$data_result = mysqli_query($link,$query);
+$files_array=array();
+while($row = mysqli_fetch_assoc($data_result))
 {
-    mkdir($_SERVER['DOCUMENT_ROOT'].DIRECTORY_SEPARATOR.'img');
-    mkdir($_SERVER['DOCUMENT_ROOT'].DIRECTORY_SEPARATOR.'img_thumbnails');
-    header("Location: index.php");
-    die();
-}
-//Создаем массив файлов содержащийся в папке $folder
-else
-{
-    $folder = opendir($_SERVER['DOCUMENT_ROOT'] . DIRECTORY_SEPARATOR . 'img');
-    if ($folder != false) {
-        while ($file = readdir($folder))
-        {
-            if (($file == ".") || ($file == "..")) continue;
-            $files_array[] = $file;
-        }
-        closedir($folder);
-    }
+    $files_array[]=$row;
 }
 if ((isset($_FILES['images'])))
-{           //Проверка типа загружаемого файла
+{   //Проверка типа загружаемого файла
     $type_array=getimagesize($_FILES['images']['tmp_name']);
-//    $_SESSION['type']=$type_array[2];
-    $file_path=$_SERVER['DOCUMENT_ROOT'].'/'.'img/'.$_FILES['images']['name'];
+    $file_path='img/'.$_FILES['images']['name'];
+    $file_thumb_path='img_thumbnails/'.$_FILES['images']['name'];
     $file_name=$_FILES['images']['name'];
     $description=$_POST['description'];
     if (($type_array[2])===(1)||($type_array[2])===(2)||($type_array[2])===(3))
@@ -55,7 +40,7 @@ if ((isset($_FILES['images'])))
                     move_uploaded_file($_FILES['images']['tmp_name'],$file_path);
                     makeThumbnails($_SERVER['DOCUMENT_ROOT'].'/'.'img_thumbnails/',$file_path,$file_name);
                     $query=<<<SQL
-INSERT INTO `file_information` (`id`, `download_time`, `path`, `description`) VALUES (NULL, CURRENT_TIMESTAMP, '$file_path', '$description');
+INSERT INTO `file_information` (`id`, `upload_time`, `path_img`, `path_img_thumb`, `description`) VALUES (NULL, CURRENT_TIMESTAMP, '$file_path', '$file_thumb_path','$description');
 SQL;
 
                     $result = mysqli_query($link,$query);
@@ -91,27 +76,26 @@ SQL;
         <div class="col-md-3 info">
             <p>Техническая информация</p>
             <?php
-            echo "Дескриптор каталога {$folder}<br>";
-            echo "Файлы:<br>";
-            foreach ($files_array as $item) {
-                echo $item."<br>";
+            echo "Файлы в БД:<br>";
+            foreach ($files_array as $file) {
+                echo $file['id']." - ".$file['views']." - ".$file['path_img']."<br>";
             }
             ?>
         </div>
         <div class="col-md-6">
-            <div class="row">
-            <h1 class="title">Image_Gallery (Beta Version)</h1>
-            <?php
-            if (isset($files_array))
-            {
-                foreach ($files_array as $files)
+            <div class="row ">
+                <h1 class="title">Image_Gallery (Beta Version)</h1>
+                <?php foreach ($files_array as $files)
                 {
-                    echo "<div class=\"col-md-3 col-xs-6 col-sm-4\">
-                          <a class=\"thumbnail\" href=\"img/{$files}\" target=\"_blank\"><img src=\"img_thumbnails/{$files}\"></a>
-                      </div>";
-                }
-            }
-            ?>
+                    echo <<<HTML
+               <div class="thumbnail_new">
+                    <a class="thumbnail" href="photo.php?id={$files['id']}" target="_blank">
+                        <img class="imgage-thumbnail" src="{$files['path_img_thumb']}" alt="...">
+                     </a> 
+                     <p>Просмотры: <span class="badge">{$files['views']}</span></p>
+               </div>
+HTML;
+                }?>
             </div>
         </div>
         <div class="col-md-3 info">
@@ -134,7 +118,7 @@ SQL;
                 <div>
                     <label for="description">Добавьте описание</label>
                     <p><textarea rows="5" cols="45" id="description" name="description"></textarea></p>
-                </div><br>
+                </div>
                 <button type="submit" class="btn btn-success">Загрузить</button>
             </form>
             <h4><?php echo $result?></h4>
