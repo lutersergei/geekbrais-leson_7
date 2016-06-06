@@ -13,19 +13,21 @@ if (isset($_SESSION['result']))
 if ((isset($_FILES['images'])))
 {   //Проверка типа загружаемого файла
     $type_array=getimagesize($_FILES['images']['tmp_name']);
-    $file_path='img/'.$_FILES['images']['name'];
-    $file_thumb_path='img_thumbnails/'.$_FILES['images']['name'];
     $file_name=$_FILES['images']['name'];
+    $file_path=UPLOAD_IMAGES_FOLDER.$file_name;
+    $file_thumb_path=THUMBNAILS_FOLDER.$file_name;
     $file_temp_name=$_FILES['images']['tmp_name'];
     $description=$_POST['description'];
+    $file_size=$_FILES['images']['size'];
+    $file_error=$_FILES['images']['error'];
     if (($type_array[2])===(1)||($type_array[2])===(2)||($type_array[2])===(3))
         {   //Проверка размера файла
-            if (($_FILES['images']['size'])<MAX_SIZE)
+            if (($file_size)<MAX_SIZE)
             {
-                if (($_FILES['images']['error'])===0)
+                if (($file_error)===0)
                 {
                     move_uploaded_file($file_temp_name,$file_path);
-                    makeThumbnails($_SERVER['DOCUMENT_ROOT'].'/'.'img_thumbnails/',$file_path,$file_name);
+                    makeThumbnails(THUMBNAILS_FOLDER ,$file_path,$file_name);
                     add_new_image ($file_path, $file_thumb_path, $description);
                     $_SESSION['result']=SUCCESS;
                     header("Location: index.php");
@@ -46,4 +48,3 @@ if ((isset($_FILES['images'])))
 $images=get_all_images_by_views();
 mysqli_close($link);
 include 'views/gallery.php';
-
