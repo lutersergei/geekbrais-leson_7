@@ -33,7 +33,7 @@ function makeThumbnails($updir, $img, $id,$MaxWe=300,$MaxHe=200){
         $new_image = imagecreatetruecolor($newWidth, $newHeight);
         imagecopyresized($new_image, $old_image, 0, 0, 0, 0, $newWidth, $newHeight, $width, $height);
 
-        $imgt($new_image, $updir."".$id);
+        $imgt($new_image, $updir.$id);
         return;
     }
 }
