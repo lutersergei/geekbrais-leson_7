@@ -29,6 +29,7 @@ $query=<<<SQL
 UPDATE `file_information` SET `views` = '$views' WHERE `file_information`.`id` = '$id';
 SQL;
 $data_result = mysqli_query($link,$query);
+mysqli_close($link);
 ?>
 <!doctype html>
 <html lang="ru">
