@@ -16,20 +16,17 @@ if ((isset($_FILES['images'])))
     $file_path='img/'.$_FILES['images']['name'];
     $file_thumb_path='img_thumbnails/'.$_FILES['images']['name'];
     $file_name=$_FILES['images']['name'];
+    $file_temp_name=$_FILES['images']['tmp_name'];
     $description=$_POST['description'];
     if (($type_array[2])===(1)||($type_array[2])===(2)||($type_array[2])===(3))
         {   //Проверка размера файла
             if (($_FILES['images']['size'])<MAX_SIZE)
             {
-                if (($_FILES['images']['error'])===0)   //На проверку всех ошибок не хватило времени
+                if (($_FILES['images']['error'])===0)
                 {
-                    move_uploaded_file($_FILES['images']['tmp_name'],$file_path);
+                    move_uploaded_file($file_temp_name,$file_path);
                     makeThumbnails($_SERVER['DOCUMENT_ROOT'].'/'.'img_thumbnails/',$file_path,$file_name);
-                    $query=<<<SQL
-INSERT INTO `file_information` (`id`, `upload_time`, `path_img`, `path_img_thumb`, `description`) VALUES (NULL, CURRENT_TIMESTAMP, '$file_path', '$file_thumb_path','$description');
-SQL;
-
-                    $result = mysqli_query($link,$query);
+                    add_new_image ($file_path, $file_thumb_path, $description);
                     $_SESSION['result']=SUCCESS;
                     header("Location: index.php");
                     die();

@@ -23,7 +23,7 @@
         </div>
         <div class="col-md-6">
             <div class="row ">
-                <h1 class="title">Image_Gallery (Beta Version)</h1>
+                <h1 class="title">Image Gallery</h1>
                 <?php foreach ($images as $image)
                 {
                     echo <<<HTML

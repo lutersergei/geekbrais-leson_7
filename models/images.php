@@ -37,3 +37,12 @@ SQL;
     if ($data_result) return true;
     else return false;
 }
+function add_new_image ($file_path, $file_thumb_path, $description)
+{
+    global $link;
+    $query=<<<SQL
+INSERT INTO `file_information` (`id`, `upload_time`, `path_img`, `path_img_thumb`, `description`) VALUES (NULL, CURRENT_TIMESTAMP, '$file_path', '$file_thumb_path','$description');
+SQL;
+
+    $result = mysqli_query($link,$query);
+}

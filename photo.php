@@ -19,7 +19,7 @@ if ($image_information=get_image_information($id))
         $path_img=$item['path_img'];
         $views=++$item['views'];
     }
-    $update_numbers_of_views=update_numbers_of_views($id, $views);
+    update_numbers_of_views($id, $views);
 }
 else {
     die("Неверный параметр"); //404
