@@ -5,8 +5,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Gallery</title>
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/style.css" rel="stylesheet">
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/style.css" rel="stylesheet">
     <link href='https://fonts.googleapis.com/css?family=Josefin+Sans:400|Roboto+Mono:300' rel='stylesheet' type='text/css'>
 </head>
 <body>
@@ -16,22 +16,22 @@
             <p>Техническая информация</p>
             <?php
             echo "Файлы в БД:<br>";
-            foreach ($files_array as $file) {
-                echo $file['id']." - ".$file['views']." - ".$file['path_img']."<br>";
+            foreach ($images as $image) {
+                echo $image['id']." - ".$image['views']." - ".$image['path_img']."<br>";
             }
             ?>
         </div>
         <div class="col-md-6">
             <div class="row ">
                 <h1 class="title">Image_Gallery (Beta Version)</h1>
-                <?php foreach ($files_array as $files)
+                <?php foreach ($images as $image)
                 {
                     echo <<<HTML
                <div class="thumbnail_new">
-                    <a class="thumbnail" href="photo.php?id={$files['id']}" target="_blank">
-                        <img class="imgage-thumbnail" src="{$files['path_img_thumb']}" alt="...">
+                    <a class="thumbnail" href="../photo.php?id={$image['id']}" target="_blank">
+                        <img class="imgage-thumbnail" src="{$image['path_img_thumb']}" alt="...">
                      </a> 
-                     <p>Просмотры: <span class="badge">{$files['views']}</span></p>
+                     <p>Просмотры: <span class="badge">{$image['views']}</span></p>
                </div>
 HTML;
                 }?>

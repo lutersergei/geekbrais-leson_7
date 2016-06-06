@@ -6,3 +6,5 @@ define('DANGER_NOT_IMAGE','Файл не является изображение
 define('ERROR','Произошла ошибка');
 define('DANGER_SIZE_EXCEEDED','Превышен максимальный размер файла');
 define('SUCCESS','Изображение успешно загружено');
+$folder=false;
+$result=false;
