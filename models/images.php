@@ -43,6 +43,11 @@ function add_new_image ($file_path, $file_thumb_path, $description)
     $query=<<<SQL
 INSERT INTO `file_information` (`id`, `upload_time`, `path_img`, `path_img_thumb`, `description`) VALUES (NULL, CURRENT_TIMESTAMP, '$file_path', '$file_thumb_path','$description');
 SQL;
-
-    $result = mysqli_query($link,$query);
+    mysqli_query($link,$query);
+}
+function reset_database()
+{
+    global $link;
+    $query="DELETE FROM `file_information` WHERE 1";
+    mysqli_query($link,$query);
 }

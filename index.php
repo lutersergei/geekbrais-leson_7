@@ -1,5 +1,5 @@
 <?php
-include_once 'settings.php';
+include_once 'initial.php';
 include_once 'models/images.php';
 include_once 'models/func_make_thumb.php';
 include_once 'models/database_connection.php';
@@ -26,9 +26,9 @@ if ((isset($_FILES['images'])))
             {
                 if (($file_error)===0)
                 {
-                    move_uploaded_file($file_temp_name,$file_path);
-                    makeThumbnails(THUMBNAILS_FOLDER ,$file_path,$file_name);
-                    add_new_image ($file_path, $file_thumb_path, $description);
+                    move_uploaded_file($file_temp_name, $file_path);
+                    makeThumbnails(THUMBNAILS_FOLDER ,$file_path, $file_name);
+                    add_new_image($file_path, $file_thumb_path, $description);
                     $_SESSION['result']=SUCCESS;
                     header("Location: index.php");
                     die();

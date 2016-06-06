@@ -43,6 +43,7 @@ HTML;
             var_dump($_FILES);
             var_dump($_SESSION);
             ?>
+            <a href="setting.php">setting</a>
         </div>
     </div>
     <div class="row">

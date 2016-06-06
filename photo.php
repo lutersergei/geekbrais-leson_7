@@ -1,5 +1,5 @@
 <?php
-include_once 'settings.php';
+include_once 'initial.php';
 include_once 'models/images.php';
 include_once 'models/database_connection.php';
 if (isset($_GET['id']))
@@ -26,5 +26,3 @@ else {
 }
 mysqli_close($link);
 include 'views/photo.php';
-
-
