@@ -56,7 +56,6 @@ function reset_database()
         if (($file == ".") || ($file == "..")) continue;
         $files_array[] = $file;
     }
-    var_dump($files_array);
     foreach ($files_array as $item)
     {
         unlink(UPLOAD_IMAGES_FOLDER.'/'.$item);
@@ -67,7 +66,6 @@ function reset_database()
         if (($file == ".") || ($file == "..")) continue;
         $files_array[] = $file;
     }
-    var_dump($files_array);
     foreach ($files_array as $item)
     {
         unlink(THUMBNAILS_FOLDER.'/'.$item);

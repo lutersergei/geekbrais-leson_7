@@ -4,16 +4,16 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Photo</title>
     <link href="../css/bootstrap.min.css" rel="stylesheet">
     <link href="../css/style.css" rel="stylesheet">
     <link href='https://fonts.googleapis.com/css?family=Comfortaa:400,300&subset=latin,cyrillic' rel='stylesheet' type='text/css'></head>
 </head>
 <body>
-<div class="container-fluid">
+<div class="container">
     <div class="row">
-        <div class="col-md-3 info"></div>
-        <div class="col-md-6">
+        <div class="col-xs-12 col-sm-10 col-sm-pull-1 col-sm-push-1">
             <div class="row ">
                 <ul class="nav nav-tabs">
                     <li role="presentation"><a href="../index.php">Gallery</a></li>
@@ -22,13 +22,11 @@
                 </ul>
             </div>
         </div>
-        <div class="col-md-3 info"></div>
     </div>
 </div>
-<div class="container-fluid">
+<div class="container">
     <div class="row">
-        <div class="col-md-3 info"></div>
-        <div class="col-md-6">
+        <div class="col-xs-12 col-sm-10 col-sm-pull-1 col-sm-push-1">
             <form class="form-inline" method="post">
                 <div>
                     <label class="bg-success" for="description">Изменить описание</label>
@@ -37,7 +35,6 @@
                 </div>
             </form>
         </div>
-        <div class="col-md-3 info"></div>
     </div>
 </div>
 </body>
