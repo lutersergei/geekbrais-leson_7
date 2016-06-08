@@ -1,13 +1,11 @@
-.info {
-    font-family: 'Roboto Mono', monospace;
-    font-size: 8pt;
-    color: #5cb85c;
-}
 .title {
-    font-family: 'Josefin Sans', sans-serif;
-    font-size: 34pt;
-    color: rgba(15, 70, 80, 0.9);;
-    margin-bottom: 50px;
+    font-family: 'Comfortaa', cursive;
+    font-size: 32pt;
+    font-weight: 300;
+    /*text-shadow: 1px 2px 3px rgb(51, 122, 183);*/
+    text-align: center;
+    color: rgba(68, 68, 68, 0.89);
+    margin-bottom: 30px;
 }
 .imgage-thumbnail {
     /*max-height: 200px;*/
@@ -21,4 +19,28 @@
 }
 .thumbnail {
     margin-bottom: 0px;
+}
+.new_font {
+    font-family: 'Comfortaa', cursive;
+    font-size: 16pt;
+    min-width: 230px;
+}
+.nav-tabs {
+    font-family: 'Comfortaa', cursive;
+    font-size: 14pt;
+}
+.btn-glyphicon { padding:8px; background:#ffffff; margin-right:4px;
+}
+.icon-btn {
+    padding: 1px 15px 3px 2px; border-radius:50px;
+    text-align: right;
+    font-family: 'Comfortaa', cursive;
+    font-size: 16pt;}
+.button_upload {
+    text-align: center;
+}
+.bg-danger, .bg-success{
+    margin-top: 20px;
+    font-size: 16pt;
+    padding: 15px;
 }

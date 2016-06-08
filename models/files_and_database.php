@@ -50,4 +50,43 @@ function reset_database()
     global $link;
     $query="DELETE FROM `file_information` WHERE 1";
     mysqli_query($link,$query);
+    $folder=opendir(UPLOAD_IMAGES_FOLDER);
+    while ($file = readdir($folder))
+    {
+        if (($file == ".") || ($file == "..")) continue;
+        $files_array[] = $file;
+    }
+    var_dump($files_array);
+    foreach ($files_array as $item)
+    {
+        unlink(UPLOAD_IMAGES_FOLDER.'/'.$item);
+    }
+    $folder=opendir(THUMBNAILS_FOLDER);
+    while ($file = readdir($folder))
+    {
+        if (($file == ".") || ($file == "..")) continue;
+        $files_array[] = $file;
+    }
+    var_dump($files_array);
+    foreach ($files_array as $item)
+    {
+        unlink(THUMBNAILS_FOLDER.'/'.$item);
+    }
+    closedir($folder);
+}
+function delete_by_id ($id,$path_img,$path_img_thumb)
+{
+    global $link;
+    $query="DELETE FROM `file_information` WHERE `id` = '$id'";
+    mysqli_query($link,$query);
+    if ((unlink($path_img))&&(unlink($path_img_thumb)))
+    {
+        return true;
+    }
+}
+function change_description ($id, $text)
+{
+    global $link;
+    $query="UPDATE `file_information` SET `description` = '$text' WHERE `file_information`.`id` = '$id'";
+    mysqli_query($link,$query);
 }

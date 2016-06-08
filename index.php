@@ -1,9 +1,10 @@
 <?php
 include_once 'initial.php';
-include_once 'models/images.php';
-include_once 'models/func_make_thumb.php';
+include_once 'models/files_and_database.php';
+include_once 'models/make_thumbnails.php';
 include_once 'models/database_connection.php';
-
+include_once 'models/transileration.php';
+$_SESSION['add_view']='true';
 //Передача результата из сессии в переменную 
 if (isset($_SESSION['result']))
 {
@@ -14,8 +15,9 @@ if ((isset($_FILES['images'])))
 {   //Проверка типа загружаемого файла
     $type_array=getimagesize($_FILES['images']['tmp_name']);
     $file_name=$_FILES['images']['name'];
-    $file_path=UPLOAD_IMAGES_FOLDER.$file_name;
-    $file_thumb_path=THUMBNAILS_FOLDER.$file_name;
+    $file_translit_name=transliteration($file_name,$alphabet);
+    $file_path=UPLOAD_IMAGES_FOLDER.$file_translit_name;
+    $file_thumb_path=THUMBNAILS_FOLDER.$file_translit_name;
     $file_temp_name=$_FILES['images']['tmp_name'];
     $description=$_POST['description'];
     $file_size=$_FILES['images']['size'];
@@ -27,7 +29,7 @@ if ((isset($_FILES['images'])))
                 if (($file_error)===0)
                 {
                     move_uploaded_file($file_temp_name, $file_path);
-                    makeThumbnails(THUMBNAILS_FOLDER ,$file_path, $file_name);
+                    makeThumbnails(THUMBNAILS_FOLDER ,$file_path, $file_translit_name);
                     add_new_image($file_path, $file_thumb_path, $description);
                     $_SESSION['result']=SUCCESS;
                     header("Location: index.php");

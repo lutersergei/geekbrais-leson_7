@@ -1,7 +1,7 @@
 <?php
 include_once 'initial.php';
 include_once 'models/database_connection.php';
-include_once 'models/images.php';
+include_once 'models/files_and_database.php';
 if (isset($_POST['action']))
 {
     if ($_POST['action'] === 'reset')
@@ -10,7 +10,5 @@ if (isset($_POST['action']))
         header("Location: index.php");
         die();
     }
-
 }
-var_dump($_POST);
 include 'views/setting.php';
