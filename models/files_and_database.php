@@ -50,25 +50,34 @@ function reset_database()
     global $link;
     $query="DELETE FROM `file_information` WHERE 1";
     mysqli_query($link,$query);
+//    $files_array=array();
+//    $files_thumb_array=array();
     $folder=opendir(UPLOAD_IMAGES_FOLDER);
     while ($file = readdir($folder))
     {
         if (($file == ".") || ($file == "..")) continue;
         $files_array[] = $file;
     }
-    foreach ($files_array as $item)
+    if (isset($files_array))
     {
-        unlink(UPLOAD_IMAGES_FOLDER.'/'.$item);
+        foreach ($files_array as $item)
+        {
+            unlink(UPLOAD_IMAGES_FOLDER.$item);
+        }
     }
+    closedir($folder);
     $folder=opendir(THUMBNAILS_FOLDER);
     while ($file = readdir($folder))
     {
         if (($file == ".") || ($file == "..")) continue;
-        $files_array[] = $file;
+        $files_thumb_array[] = $file;
     }
-    foreach ($files_array as $item)
+    if (isset($files_thumb_array))
     {
-        unlink(THUMBNAILS_FOLDER.'/'.$item);
+        foreach ($files_thumb_array as $item)
+        {
+            unlink(THUMBNAILS_FOLDER.$item);
+        }
     }
     closedir($folder);
 }
@@ -81,6 +90,7 @@ function delete_by_id ($id,$path_img,$path_img_thumb)
     {
         return true;
     }
+    else return false;
 }
 function change_description ($id, $text)
 {

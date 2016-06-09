@@ -7,7 +7,7 @@ if (isset($_POST['action']))
     if ($_POST['action'] === 'reset')
     {
         reset_database();
-        header("Location: index.php");
+        header('Location:index.php');
         die();
     }
 }

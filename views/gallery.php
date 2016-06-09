@@ -19,6 +19,7 @@
                     <li role="presentation" ><a href="../add_image.php">Add Image </a></li>
                     <li role="presentation" ><a href="../setting.php">Settings</a></li>
                 </ul>
+            </div>
                 <h1 class="title">Image Gallery</h1>
                 <?php foreach ($images as $image)
                 {
@@ -32,7 +33,6 @@
 HTML;
                 }?>
                 <hr>
-            </div>
         </div>
     </div>
     <div class="row">

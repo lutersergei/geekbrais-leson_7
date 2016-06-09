@@ -28,7 +28,7 @@
             <h1>Reset database and clean folders</h1>
             <form action="" method="post">
                 <input type="hidden" name="action" value="reset">
-                <button class="btn icon-btn btn-danger" disabled href="#"><span class="glyphicon btn-glyphicon glyphicon-trash img-circle text-danger"></span>Delete</button>
+                <button class="btn icon-btn btn-danger" href="#"><span class="glyphicon btn-glyphicon glyphicon-trash img-circle text-danger"></span>Delete</button>
             </form>
         </div>
     </div>
